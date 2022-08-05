@@ -1,0 +1,57 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cppCustomBuild",
+            "type": "cppbuild",
+            "command": "g++",
+            "args": [
+                "-o",
+                "bin",
+                "${fileBasename}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "none",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "focus": false,
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "cppCustomRun",
+            "dependsOn":"cppCustomBuild",
+            "type": "shell",
+            "command": "./bin",
+            "args": ["<", "in.txt", ">","out.txt"],
+            "group": "none",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "windows":{
+                "command": "bin",
+                "options": {
+                    "shell": {
+                        "executable": "cmd",
+                        "args": ["/d", "/c"]
+                    }
+                }
+            }
+        }
+    ]
+}
